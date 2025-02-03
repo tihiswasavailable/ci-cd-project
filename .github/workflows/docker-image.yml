@@ -30,5 +30,11 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
           cd /home/ec2-user/cicd-project
-          docker-compose pull
-          docker-compose up -d --force-recreate
+          sudo docker stop nodejs-app || true
+          sudo docker rm nodejs-app || true
+          sudo docker rmi medisimo/cicd-pipeline:latest || true
+          sudo docker pull medisimo/cicd-pipeline:latest
+          sudo docker run -d \
+            --name nodejs-app \
+            -p 3000:3000 \
+            medisimo/cicd-pipeline:latest
