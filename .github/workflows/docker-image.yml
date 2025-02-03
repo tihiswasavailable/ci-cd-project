@@ -22,4 +22,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: thiswasavailable/ci-cd-project:latest
+        tags: thiswasavailable/cicd-pipeline:latest
