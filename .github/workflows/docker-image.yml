@@ -1,9 +1,7 @@
 name: Docker Image CI
-
 on:
   push:
     branches: [ "main" ]
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,3 +21,14 @@ jobs:
         context: .
         push: true
         tags: medisimo/cicd-pipeline:latest
+        
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ec2-user
+        key: ${{ secrets.EC2_SSH_KEY }}
+        script: |
+          cd /home/ec2-user/cicd-project
+          docker-compose pull
+          docker-compose up -d --force-recreate
