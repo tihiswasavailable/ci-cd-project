@@ -22,4 +22,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: thiswasavailable/cicd-pipeline:latest
+        tags: medisimo/cicd-pipeline:latest
