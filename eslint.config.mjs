@@ -10,8 +10,11 @@ export default [
         ...globals.jest,
         ...globals.node,
         ...globals.es2022
-      }
+      },
+      sourceType: "module"
     },
+    files: ["**/*.js"],
+    ignores: ["node_modules/**", "coverage/**", "dist/**"]
   },
   pluginJs.configs.recommended,
 ];
