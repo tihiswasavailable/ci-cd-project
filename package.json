@@ -1,33 +1,58 @@
 {
   "name": "simple-nodejs-app",
   "version": "1.0.0",
-  "description": "Research about a person",
+  "type": "module",
+  "description": "A web application to search and retrieve Wikipedia information about people",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+    "dev": "nodemon index.js --watch src --watch public",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
+    "test:watch": "jest --watch",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "prepare": "husky install"
   },
+  "keywords": [
+    "wikipedia",
+    "search",
+    "nodejs",
+    "express",
+    "api"
+  ],
+  "author": {
+    "name": "Stefan Jovic",
+    "email": "email@email.com"
+  },
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rat9615/simple-nodejs-app.git"
+    "url": "git+https://github.com/tihiswasavailable/ci-cd-project"
   },
-  "author": "Rohan R",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rat9615/simple-nodejs-app/issues"
-  },
-  "homepage": "https://github.com/rat9615/simple-nodejs-app#readme",
   "dependencies": {
     "ejs": "^3.1.10",
     "express": "^4.17.3",
-    "node-fetch": "^3.3.2",
-    "nodemon": "^3.1.9",
-    "wiki-infobox-parser": "^0.1.11"
+    "node-fetch": "^3.3.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.14.0",
+    "husky": "^8.0.0",
     "jest": "^29.7.0",
+    "lint-staged": "^15.0.0",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.2.0",
     "supertest": "^7.0.0"
   },
-  "type": "module"
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  }
 }
