@@ -7,8 +7,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js --watch src --watch public",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
-    "test:watch": "jest --watch",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage --no-cache",
+    "test:watch": "jest --watch --config jest.config.mjs",
     "lint": "eslint .",
     "format": "prettier --write .",
     "prepare": "husky install"

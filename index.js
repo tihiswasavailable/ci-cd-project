@@ -1,101 +1,62 @@
-import express from 'express';
-import fetch from 'node-fetch';
+import express from "express";
+import fetch from "node-fetch";
 
 const app = express();
 
 // ejs
-app.set("view engine", 'ejs');
+app.set("view engine", "ejs");
 
 // routes
-app.get('/', (req, res) => {
-    res.render('index');
+app.get("/", (req, res) => {
+  res.render("index");
 });
 
-app.get('/index', async (req, response) => {
-    try {
-        const params = new URLSearchParams({
-            action: "opensearch",
-            search: req.query.person,
-            limit: "1",
-            namespace: "0",
-            format: "json"
-        });
-
-        const url = `https://en.wikipedia.org/w/api.php?${params}`;
-
-        // Fetch Wikipedia search results
-        const searchRes = await fetch(url);
-        const result = await searchRes.json();
-        
-        if (!result[3][0]) {
-            return response.status(404).send({ error: 'Person not found' });
-        }
-
-        // Get the page title from the URL
-        const pageTitle = result[3][0].split('/wiki/')[1];
-
-        // Fetch the page content using the MediaWiki API
-        const contentUrl = new URL('https://en.wikipedia.org/w/api.php');
-        contentUrl.search = new URLSearchParams({
-            action: 'query',
-            prop: 'revisions',
-            titles: pageTitle,
-            rvslots: '*',
-            rvprop: 'content',
-            format: 'json',
-            formatversion: '2'
-        });
-
-        const contentRes = await fetch(contentUrl);
-        const contentData = await contentRes.json();
-        
-        // Extract infobox data
-        const page = contentData.query.pages[0];
-        if (!page || !page.revisions || !page.revisions[0].slots.main.content) {
-            return response.status(404).send({ error: 'Content not found' });
-        }
-
-        const wikitext = page.revisions[0].slots.main.content;
-        const infoboxData = parseInfobox(wikitext);
-        
-        response.json(infoboxData);
-
-    } catch (err) {
-        console.error('Error:', err);
-        response.status(500).send({ error: 'Internal server error' });
-    }
-});
-
-function parseInfobox(wikitext) {
-    // Basic infobox parser - you might want to enhance this
-    const infoboxRegex = /\{\{Infobox[^}]+\}\}/i;
-    const match = wikitext.match(infoboxRegex);
-    
-    if (!match) {
-        return {};
+app.get("/index", async (req, res) => {
+  try {
+    // Check for required query parameter
+    if (!req.query.person) {
+      return res.status(400).json({ error: "Person query is required" });
     }
 
-    const infobox = match[0];
-    const lines = infobox.split('\n');
-    const data = {};
-
-    lines.forEach(line => {
-        const parts = line.split('=').map(p => p.trim());
-        if (parts.length === 2) {
-            // Clean up the value by removing wiki markup
-            const value = parts[1]
-                .replace(/\[\[([^\]|]+?)(?:\|[^\]]+)?\]\]/g, '$1') // Handle wiki links
-                .replace(/''/g, '') // Remove italic markers
-                .replace(/{{[^}]+}}/g, ''); // Remove templates
-            
-            data[parts[0]] = value;
-        }
+    const params = new URLSearchParams({
+      action: "opensearch",
+      search: req.query.person,
+      limit: "1",
+      namespace: "0",
+      format: "json",
     });
 
-    return data;
-}
+    const response = await fetch(
+      `https://en.wikipedia.org/w/api.php?${params}`,
+    );
 
-// port
-app.listen(3000, () => console.log("Listening at port 3000..."));
+    if (!response.ok) {
+      throw new Error("Wikipedia API error");
+    }
+
+    const data = await response.json();
+
+    // Ensure we have valid data
+    if (
+      !data ||
+      !Array.isArray(data) ||
+      data.length < 4 ||
+      !data[3] ||
+      !data[3][0]
+    ) {
+      return res.status(404).json({ error: "Person not found" });
+    }
+
+    // Extract data ensuring we have values or empty strings
+    const url = data[3][0] || "";
+    const title = data[1][0] || "";
+    const description = data[2][0] || "";
+
+    // Return formatted response
+    return res.json({ url, title, description });
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 export default app;
