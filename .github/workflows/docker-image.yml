@@ -69,8 +69,30 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
+          timeout: 60s
+          debug: true  # Enable debug mode
           script: |
-            cd /home/ec2-user/cicd-project
+            echo "Starting deployment process..."
+            echo "Current directory: $(pwd)"
+            echo "Testing Docker access..."
+            docker ps
+            
+            echo "Changing to project directory..."
+            cd /home/ec2-user/cicd-project || exit 1
+            echo "Current directory after change: $(pwd)"
+            
+            echo "Setting up environment..."
             echo "PORT=3000" > .env
-            docker compose pull
+            echo "Environment file created"
+            
+            echo "Pulling Docker images..."
+            docker compose pull || exit 1
+            echo "Pull completed"
+            
+            echo "Starting containers..."
             docker compose up -d --force-recreate
+            echo "Containers started"
+            
+            echo "Checking container status..."
+            docker compose ps
+            echo "Deployment complete"
