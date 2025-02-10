@@ -1,4 +1,3 @@
-// __tests__/server.test.js
 import { jest } from "@jest/globals";
 
 describe("Server", () => {
@@ -9,8 +8,10 @@ describe("Server", () => {
     mockConsole = jest.spyOn(console, "log").mockImplementation(() => {});
 
     mockApp = {
-      listen: jest.fn((port, cb) => {
-        cb();
+      listen: jest.fn((port, host, cb) => {
+        if (typeof cb === "function") {
+          cb();
+        }
         return { close: jest.fn() };
       }),
     };
@@ -31,7 +32,11 @@ describe("Server", () => {
 
     await import("../server.js");
 
-    expect(mockApp.listen).toHaveBeenCalledWith(3000, expect.any(Function));
+    expect(mockApp.listen).toHaveBeenCalledWith(
+      3000,
+      "0.0.0.0",
+      expect.any(Function),
+    );
     expect(mockConsole).toHaveBeenCalledWith("Server is running on port 3000");
 
     process.env.PORT = originalPort;
@@ -43,7 +48,11 @@ describe("Server", () => {
 
     await import("../server.js");
 
-    expect(mockApp.listen).toHaveBeenCalledWith("4000", expect.any(Function));
+    expect(mockApp.listen).toHaveBeenCalledWith(
+      "4000",
+      "0.0.0.0",
+      expect.any(Function),
+    );
     expect(mockConsole).toHaveBeenCalledWith("Server is running on port 4000");
 
     process.env.PORT = originalPort;
