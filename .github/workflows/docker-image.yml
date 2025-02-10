@@ -63,36 +63,18 @@ jobs:
     needs: build-and-deploy
     runs-on: ubuntu-latest
     steps:
+      - name: Check SSH key format
+        run: |
+          echo "Checking SSH key format..."
+          echo "${{ secrets.EC2_SSH_KEY }}" | grep -q "BEGIN" && \
+          echo "SSH key starts correctly" || echo "SSH key may be malformed"
+          
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
-          timeout: 180s
-          debug: true  # Enable debug mode
+          timeout: 60s
           script: |
-            echo "Starting deployment process..."
-            echo "Current directory: $(pwd)"
-            echo "Testing Docker access..."
-            docker ps
-            
-            echo "Changing to project directory..."
-            cd /home/ec2-user/cicd-project || exit 1
-            echo "Current directory after change: $(pwd)"
-            
-            echo "Setting up environment..."
-            echo "PORT=3000" > .env
-            echo "Environment file created"
-            
-            echo "Pulling Docker images..."
-            docker compose pull || exit 1
-            echo "Pull completed"
-            
-            echo "Starting containers..."
-            docker compose up -d --force-recreate
-            echo "Containers started"
-            
-            echo "Checking container status..."
-            docker compose ps
-            echo "Deployment complete"
+            whoami
