@@ -1,20 +1,21 @@
 export default {
   testEnvironment: 'node',
   transform: {},
+  moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.js$': '$1'
+  },
+  testMatch: ['**/__tests__/**/*.test.js'],
   collectCoverage: true,
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
   coverageReporters: ['text', 'lcov', 'clover'],
   verbose: true,
-  testMatch: ['**/__tests__/**/*.test.js'],
-  moduleNameMapper: {
-    '^(\\.{1,2}/.*)\\.js$': '$1'
-  },
   collectCoverageFrom: [
-    '*.js',
-    '!jest.config.js',
+    '**/*.js',  // Changed to catch all JS files in any directory
+    '!jest.config.mjs',
     '!coverage/**',
-    '!node_modules/**'
+    '!node_modules/**',
+    '!**/*.config.js'  // Exclude config files
   ],
   coverageThreshold: {
     global: {
@@ -24,4 +25,4 @@ export default {
       statements: 70
     }
   }
-};
+}

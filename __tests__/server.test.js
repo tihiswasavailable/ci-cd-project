@@ -43,7 +43,6 @@ describe("Server", () => {
 
     await import("../server.js");
 
-    // Changed to expect string "4000" instead of number 4000
     expect(mockApp.listen).toHaveBeenCalledWith("4000", expect.any(Function));
     expect(mockConsole).toHaveBeenCalledWith("Server is running on port 4000");
 

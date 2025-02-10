@@ -50,7 +50,7 @@
     "*.{js,jsx}": [
       "eslint --fix",
       "prettier --write",
-      "npm test"
+      "node --experimental-vm-modules node_modules/jest/bin/jest.js \"**/__tests__/**/*.test.js\" --coverage"
     ],
     "*.{json,md,yml,yaml}": [
       "prettier --write"
