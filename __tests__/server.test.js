@@ -1,5 +1,6 @@
 import { jest } from "@jest/globals";
 
+// def. test suite
 describe("Server", () => {
   let mockApp;
   let mockConsole;
@@ -10,12 +11,13 @@ describe("Server", () => {
     mockApp = {
       listen: jest.fn((port, host, cb) => {
         if (typeof cb === "function") {
-          cb();
+          cb(); // simulating call back when starting server
         }
         return { close: jest.fn() };
       }),
     };
 
+    // mocking server module / dont satrt real server
     jest.unstable_mockModule("../index.js", () => ({
       default: mockApp,
     }));

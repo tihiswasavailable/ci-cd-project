@@ -1,12 +1,15 @@
 export default {
   testEnvironment: 'node',
   transform: {},
+  // regex removing .js from import paths 
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1'
   },
   testMatch: ['**/__tests__/**/*.test.js'],
+  // coverage 
   collectCoverage: true,
   coverageDirectory: 'coverage',
+  // JS engine instead Babel
   coverageProvider: 'v8',
   coverageReporters: ['text', 'lcov', 'clover'],
   verbose: true,

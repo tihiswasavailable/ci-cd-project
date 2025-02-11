@@ -89,14 +89,14 @@ describe("Wikipedia Search App Tests", () => {
     test("handles malformed API response", async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve(["Einstein", [], [], []]), // This matches your app's expected 404 behavior
+        json: () => Promise.resolve(["Einstein", [], [], []]),
       });
 
       const response = await request(app)
         .get("/index")
         .query({ person: "Einstein" });
 
-      expect(response.status).toBe(404); // Changed from 500 to 404 to match your app's behavior
+      expect(response.status).toBe(404);
     });
 
     test("handles non-OK API response", async () => {
