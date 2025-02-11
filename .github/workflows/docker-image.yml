@@ -78,3 +78,7 @@ jobs:
           timeout: 60s
           script: |
             whoami
+            docker pull medisimo/cicd-pipeline:latest
+            docker stop cicd-container || true
+            docker rm cicd-container || true
+            docker run -d --name cicd-container -p 3000:3000 medisimo/cicd-pipeline:latest
