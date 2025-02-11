@@ -77,7 +77,6 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           timeout: 60s
           script: |
-            whoami
             docker pull medisimo/cicd-pipeline:latest
             docker stop cicd-container || true
             docker rm cicd-container || true
