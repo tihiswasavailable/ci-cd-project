@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1739235785973" clover="3.2.0">
-  <project timestamp="1739235785973" name="All files">
+<coverage generated="1739265056347" clover="3.2.0">
+  <project timestamp="1739265056347" name="All files">
     <metrics statements="69" coveredstatements="69" conditionals="20" coveredconditionals="17" methods="0" coveredmethods="0" elements="89" coveredelements="86" complexity="0" loc="69" ncloc="69" packages="1" files="2" classes="2"/>
     <file name="index.js" path="/Users/stefanjovic/Desktop/CI-CD_project/simple-nodejs-app/index.js">
       <metrics statements="62" coveredstatements="62" conditionals="17" coveredconditionals="14" methods="0" coveredmethods="0"/>

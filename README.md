@@ -249,7 +249,7 @@ The application is deployed using Docker.
 
 - [x] Initialisierung des Repository (Git) -> (Blank Project + Project Name = nachname)
 - [x] Checkliste kopieren und in neues geklontes Repository/project einfügen
-- [ ] Checkliste versionieren
+- [x] Checkliste versionieren
 - [x] README anfertigen mit Verlinkungen, Hinweisen, etc. zum Inhalt des Repository
 - [ ] Zweites Repository für Übungen, Ausprobieren, etc. inkl. README sowie Verlinkungen und Übersicht zu den Übungen
 - [x] .gitignore angepasst: Stelle sicher, dass unnötige Dateien nicht im Repository landen
@@ -259,7 +259,7 @@ The application is deployed using Docker.
 - [x] Automatisierte Builds eingerichtet
 - [x] Automatisierte Tests implementiert
 - [x] Automatisierte Deployments konfiguriert
-- [ ] Automatisierte Code-Qualitätsanalyse mit statischen Code-Analyse-Tools
+- [x] Automatisierte Code-Qualitätsanalyse mit statischen Code-Analyse-Tools
 
 ## Testing (10%)
 
@@ -279,7 +279,7 @@ The application is deployed using Docker.
 
 ## Infrastruktur- und Konfigurationsmanagement (20%)
 
-- [ ] Template Konfigurationsdateien versioniert und zentralisiert
+- [x] Template Konfigurationsdateien versioniert und zentralisiert
 - [x] Konfigurationsdateien ausgenommen
 - [x] Verwendung in einer Build-Pipeline
 - [ ] Infrastructure as Code (IaC) mit Tools wie Terraform oder Ansible implementiert
@@ -302,5 +302,3 @@ The application is deployed using Docker.
 - [x] Build Pipeline spezifiziert mit allen Test-, Build- und Deployment-Schritten
 
 ---
-
-_Hinweis: Die Prozentangaben in den Überschriften repräsentieren die Gewichtung der jeweiligen Abschnitte im Gesamtprojekt._

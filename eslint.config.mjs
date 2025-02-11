@@ -15,7 +15,7 @@ export default [
       // using ES modules instead CommonJS (import/export)
       sourceType: "module"
     },
-    // apply ESlint for all files 
+    // apply ESlint for all js-files 
     files: ["**/*.js"],
     ignores: ["node_modules/**", "coverage/**", "dist/**"]
   },
