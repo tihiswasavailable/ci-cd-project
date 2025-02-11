@@ -184,6 +184,12 @@ Husky is configured in `package.json`:
 }
 ```
 
+To set up Husky:
+
+```bash
+npx husky add .husky/pre-commit "npm run lint-staged"
+```
+
 To set up Husky, run:
 
 ```bash
@@ -230,3 +236,71 @@ The application is deployed using Docker.
 - `PORT`: The port on which the application runs (default: 3000).
 
 ---
+
+# Continuous Delivery Checkliste
+
+## Einführung und Grundlagen
+
+- [x] Verständnis von Continuous Delivery und dessen Bedeutung
+- [x] Unterschiede zwischen Continuous Integration, Continuous Delivery und Continuous Deployment
+- [ ] CI-Anti Pattern identifizieren
+
+## Projekt Setup (20%)
+
+- [x] Initialisierung des Repository (Git) -> (Blank Project + Project Name = nachname)
+- [x] Checkliste kopieren und in neues geklontes Repository/project einfügen
+- [ ] Checkliste versionieren
+- [x] README anfertigen mit Verlinkungen, Hinweisen, etc. zum Inhalt des Repository
+- [ ] Zweites Repository für Übungen, Ausprobieren, etc. inkl. README sowie Verlinkungen und Übersicht zu den Übungen
+- [x] .gitignore angepasst: Stelle sicher, dass unnötige Dateien nicht im Repository landen
+
+## Automatisierung (10%)
+
+- [x] Automatisierte Builds eingerichtet
+- [x] Automatisierte Tests implementiert
+- [x] Automatisierte Deployments konfiguriert
+- [ ] Automatisierte Code-Qualitätsanalyse mit statischen Code-Analyse-Tools
+
+## Testing (10%)
+
+- [x] (Unit) Tests geschrieben und automatisiert
+- [ ] Integrationstests implementiert (optional)
+- [ ] End-to-End Tests eingerichtet (optional)
+
+## Deployment-Strategien
+
+- [x] Deployment-Strategien identifizieren
+- [x] Rollback-Strategien (optional)
+
+## Containerisierung (10%)
+
+- [x] Docker oder ähnliche Technologien eingesetzt
+- [x] Integration in eine Build-Pipeline
+
+## Infrastruktur- und Konfigurationsmanagement (20%)
+
+- [ ] Template Konfigurationsdateien versioniert und zentralisiert
+- [x] Konfigurationsdateien ausgenommen
+- [x] Verwendung in einer Build-Pipeline
+- [ ] Infrastructure as Code (IaC) mit Tools wie Terraform oder Ansible implementiert
+
+## Sicherheit (10%)
+
+- [x] Zugangsdaten sicher hinterlegt
+- [ ] Sicherheitsüberprüfungen mit automatisierten Sicherheitstests (z.B. OWASP ZAP)
+
+## Datenbanken
+
+- [ ] Datenbank-Migrationen automatisiert
+- [ ] Datenbank-Backups und Recovery-Pläne implementiert
+
+## Abschluss und Dokumentation (20%)
+
+- [x] Projekt-Dokumentation vervollständigt
+- [x] Branching-Strategie dokumentiert (z.B. GitFlow)
+- [x] Pipeline-Dokumentation mit allen verwendeten Tools, Skripten und Konfigurationen erstellt
+- [x] Build Pipeline spezifiziert mit allen Test-, Build- und Deployment-Schritten
+
+---
+
+_Hinweis: Die Prozentangaben in den Überschriften repräsentieren die Gewichtung der jeweiligen Abschnitte im Gesamtprojekt._
